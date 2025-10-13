@@ -37,6 +37,7 @@ jobs:
           package_ids_to_be_downloaded: ${{ vars.package_ids_to_be_downloaded }}
       - name: push new branch
         run: |
-          git commit -am "sync up on $(date +'%Y%m%dT%H%M%S')"
+          git add .
+          git commit -m "sync up on $(date +'%Y%m%dT%H%M%S')"
           git push origin $BRANCH_NAME
           
