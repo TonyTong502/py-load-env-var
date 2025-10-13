@@ -19,6 +19,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+      - name: set branch name
+        run: echo "BRANCH_NAME=sync/$(date +'%Y%m%dT%H%M%S')" >> $GITHUB_ENV
+      - name: create new branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b $BRANCH_NAME
       # Setup Python
       - uses: actions/setup-python@v6.0.0
         with:
@@ -28,4 +35,8 @@ jobs:
         env:
           service_key: ${{ secrets.service_key }}
           package_ids_to_be_downloaded: ${{ vars.package_ids_to_be_downloaded }}
+      - name: push new branch
+        run: |
+          git commit -am "sync up on $(date +'%Y%m%dT%H%M%S')"
+          git push origin $BRANCH_NAME
           
