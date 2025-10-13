@@ -162,7 +162,7 @@ def download_packages():
     target_dir = "."
     service_key_text = os.environ.get("service_key")
     package_list_text = os.environ.get("package_ids_to_be_downloaded")
-    print(package_list_text)
+    print(f"package_list_text: {package_list_text}")
     oauth = json.loads(service_key_text)
     config = oauth["oauth"]
     print(f"get packages list url")
