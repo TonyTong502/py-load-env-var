@@ -7,11 +7,11 @@ def main():
     else:
         print("MY_VARIABLE not found.")
 
-    my_env_value = os.getenv("MY_ENV")
-    if my_env_value:
-        print(f"The value of MY_ENV is: {my_env_value}")
+    my_sec_value = os.getenv("MY_SECRET")
+    if my_sec_value:
+        print(f"The value of MY_SECRET is: {my_sec_value}")
     else:
-        print("MY_ENV not found.")
+        print("MY_SECRET not found.")
 
 if __name__ == "__main__":
     main()
