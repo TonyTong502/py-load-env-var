@@ -130,7 +130,7 @@ def unzip_artifact(artifact_id: str, artifact_data: bytes, parent: str, package_
             with open(f"{parent}/{package_name}/{artifact_id}.csv", "w") as wf:
                 wf.write(vm_csv)
         else:
-            azip.extractall(f"\\\\?\\{parent}/{package_name}/{artifact_id}")
+            azip.extractall(f"{parent}/{package_name}/{artifact_id}")
 
 def unzip_package(package_name: str, package_data: bytes, parent: str):
     # unzip
