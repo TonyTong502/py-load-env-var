@@ -174,36 +174,36 @@ def download_packages():
     lines = package_list_text.splitlines()
     packages = include_packages(all_packages, lines)
     print(packages)
-    # logs = []
-    # for package in packages:
-    #     package_id = package["id"]
-    #     package_url = package["url"]
-    #     print(f"going to download package by id {package_id}")
-    #     data = download_package(package_url, headers)
-    #     print(f"package: {package_id} download complete, status:{data["status"]}")
-    #     if data["status"] == "error":
-    #         print(f"download package: {package_id} failed, going to download artifacts instead.")
-    #         logs.append(f"download package: {package_id} failed, going to download artifacts instead.\n")
-    #         package_artifacts = download_artifacts(package["artifacts"], headers)
-    #         package_folder = f"{target_dir}/{package_id}"
-    #         if os.path.exists(package_folder):
-    #             shutil.rmtree(package_folder)
-    #         os.mkdir(package_folder)
-    #         for artifact in package_artifacts:
-    #             artifact_id = artifact["id"]
-    #             artifact_status = artifact["status"]
-    #             artifact_data = artifact["data"]
-    #             if artifact_status == "error":
-    #                 logs.append(f"download package: {package_id} failed, error details: {artifact_data}\n")
-    #             else:
-    #                 unzip_artifact(artifact_id, artifact_data, target_dir, package_id)
-    #     else:
-    #         print(f"download package: {package_id} succeeded, going to unzip package zip.")
-    #         logs.append(f"download package: {package_id} succeeded, going to unzip package zip.\n")
-    #         unzip_package(package_id, data["data"], target_dir)
-    # if len(logs) > 0:
-    #     with open(f"log_{datetime.now().strftime('%Y%m%d%H%M%S')}.log", "w") as lf:
-    #         lf.writelines(logs)
+    logs = []
+    for package in packages:
+        package_id = package["id"]
+        package_url = package["url"]
+        print(f"going to download package by id {package_id}")
+        data = download_package(package_url, headers)
+        print(f"package: {package_id} download complete, status:{data["status"]}")
+        if data["status"] == "error":
+            print(f"download package: {package_id} failed, going to download artifacts instead.")
+            logs.append(f"download package: {package_id} failed, going to download artifacts instead.\n")
+            package_artifacts = download_artifacts(package["artifacts"], headers)
+            package_folder = f"{target_dir}/{package_id}"
+            if os.path.exists(package_folder):
+                shutil.rmtree(package_folder)
+            os.mkdir(package_folder)
+            for artifact in package_artifacts:
+                artifact_id = artifact["id"]
+                artifact_status = artifact["status"]
+                artifact_data = artifact["data"]
+                if artifact_status == "error":
+                    logs.append(f"download package: {package_id} failed, error details: {artifact_data}\n")
+                else:
+                    unzip_artifact(artifact_id, artifact_data, target_dir, package_id)
+        else:
+            print(f"download package: {package_id} succeeded, going to unzip package zip.")
+            logs.append(f"download package: {package_id} succeeded, going to unzip package zip.\n")
+            unzip_package(package_id, data["data"], target_dir)
+    if len(logs) > 0:
+        with open(f"log_{datetime.now().strftime('%Y%m%d%H%M%S')}.log", "w") as lf:
+            lf.writelines(logs)
 
 if __name__ == "__main__":
     download_packages()
