@@ -21,7 +21,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - name: set branch name
-        run: echo "BRANCH_NAME=$GITHUB_BASE_REF_sync/$(date +'%Y%m%dT%H%M%S')" >> $GITHUB_ENV
+        run: echo "BRANCH_NAME=${GITHUB_BASE_REF}_sync/$(date +'%Y%m%dT%H%M%S')" >> $GITHUB_ENV
       - name: create new branch
         run: |
           git config user.name "github-actions[bot]"
