@@ -25,5 +25,5 @@ jobs:
       - run: python .github/python_scripts/ipg_sync_tenant.py
         env:
           MY_SECRET: ${{ secrets.MY_SECRET }}
-          MY_VARIABLE: ${{ variables.MY_VARIABLE }}
+          MY_VARIABLE: ${{ vars.MY_VARIABLE }}
           
