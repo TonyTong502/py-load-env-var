@@ -26,6 +26,6 @@ jobs:
       - run: pip install requests
       - run: python .github/python_scripts/ipg_sync_tenant.py
         env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-          MY_VARIABLE: ${{ vars.MY_VARIABLE }}
+          service_key: ${{ secrets.service_key }}
+          package_ids_to_be_downloaded: ${{ vars.package_ids_to_be_downloaded }}
           
